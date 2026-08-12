@@ -12,6 +12,9 @@ class TextDataset:
         """
         self.tokens = torch.tensor(tokens, dtype=torch.long)
         self.context_length = context_length
+        print(self.tokens.shape)
+        print(self.tokens.dtype)
+        print(self.tokens.device)
 
     def __len__(self):
          # We need one additional token for the target.
