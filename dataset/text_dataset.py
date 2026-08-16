@@ -10,6 +10,10 @@ class TextDataset:
         context_length:
             Number of tokens the model can see at once.
         """
+
+        # device = torch.device(
+        #     "cuda" if torch.cuda.is_available() else "cpu"
+        # )
         self.tokens = torch.tensor(tokens, dtype=torch.long)
         self.context_length = context_length
         print(self.tokens.shape)
