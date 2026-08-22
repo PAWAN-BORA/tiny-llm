@@ -4,9 +4,10 @@ class CharTokenizer:
     def __init__(self):
         chars = (
             string.ascii_letters +
-            # string.digits +
-            # string.punctuation +
-            " \n"
+            string.digits +
+            string.punctuation +
+            " \n" +
+            "."
         )
         self.stoi = {ch: i for i, ch in enumerate(chars)}
         self.itos = {i: ch for ch, i in self.stoi.items()}

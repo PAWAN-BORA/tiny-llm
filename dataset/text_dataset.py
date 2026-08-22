@@ -1,7 +1,8 @@
 import torch
+from torch.utils.data.dataset import Dataset
 # from torch.utils.data import Dataset
 
-class TextDataset:
+class TextDataset(Dataset):
     def __init__(self, tokens, context_length):
         """
         tokens:
