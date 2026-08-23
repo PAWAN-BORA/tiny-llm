@@ -7,7 +7,8 @@ class CharTokenizer:
             string.digits +
             string.punctuation +
             " \n" +
-            "."
+            "." +
+            "‑"
         )
         self.stoi = {ch: i for i, ch in enumerate(chars)}
         self.itos = {i: ch for ch, i in self.stoi.items()}
