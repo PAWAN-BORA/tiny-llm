@@ -7,11 +7,10 @@ from tokenizer.char_tokenizer import CharTokenizer
 def main():
     # word = "Hello Word caf"
 
-    text = """English grammar is the set of structural rules of the English language. This includes the structure of words, phrases, clauses, sentences, and whole texts."""
+    text = """Between the 8th and 11th centuries, the English spoken in some regions underwent significant changes due to contact with Old Norse, a North Germanic language. Several waves of Norsemen colonising the northern British Isles in the 8th and 9th centuries brought Old English speakers into constant contact with Old Norse. Norse influence was strongest in the north‑eastern varieties of Old English spoken in the Danelaw surrounding York; today these features are still particularly evident in Scots and Northern English. The centre of Norse influence was Lindsey, located in the Midlands. After Lindsey was incorporated into the Anglo‑Saxon polity in 920, English spread extensively throughout the region. One element of Norse influence that persists in all English varieties today is the third‑person pronoun group beginning with"""
     tokenizer = CharTokenizer()
     tokens = tokenizer.encode(text=text);
-    print(tokens)
-    context_length = 16
+    context_length = 16 
     # dataset = TextDataset(tokens=tokens, context_length=context_length)
     vocab_size = tokenizer.vocab_size;
     embedding_size = 8;
