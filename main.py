@@ -1,7 +1,11 @@
 from data.data_loader import create_data_loader
 from dataset.text_dataset import TextDataset
+from embedding.attention import SelfAttention
 from embedding.token_position_embedding import TokenPositionEmbedding
+from model.transformer import Transformer
+from tests.test_attention import test_attention
 from tokenizer.char_tokenizer import CharTokenizer
+import torch.nn as nn
 
 
 def main():
@@ -13,20 +17,40 @@ def main():
     context_length = 16 
     # dataset = TextDataset(tokens=tokens, context_length=context_length)
     vocab_size = tokenizer.vocab_size;
-    embedding_size = 8;
-    embedding = TokenPositionEmbedding(vocab_size=vocab_size, context_length=context_length, embedding_dim=embedding_size)
+    embedding_size = 4;
+    # embedding = TokenPositionEmbedding(vocab_size=vocab_size, context_length=context_length, embedding_dim=embedding_size)
+    # attention = SelfAttention(embedding_dim=embedding_size)
     loader = create_data_loader(
         tokens=tokens,
         context_length=context_length,
         batch_size=4,
     )
     x, y = next(iter(loader))
-    print("X:", x)
-    print("X shape:", x.shape)
+    # print("X:", x)
+    # print("X shape:", x.shape)
     # print("Y:", y)
-    output = embedding(x)
-    # print("Output:", output)
-    print("Output Shape:", output.shape)
+    model = Transformer(
+        vocab_size=vocab_size,
+        context_length=context_length,
+        embedding_dim=embedding_size
+    )
+    logits = model(x)
+    logits = logits.reshape(-1, vocab_size)
+    targets = y.reshape(-1)
+    loss_fn = nn.CrossEntropyLoss()
+    loss = loss_fn(logits, targets)
+    print("logits", logits.shape)
+    print("targets", targets.shape)
+    print(loss)
+    # embedded = embedding(x)
+    # print("embedded:", embedded)
+    # print("embeded Shape:", embedded.shape)
+    # 
+    # attention_output = attention(embedded)
+    # print("Attention output:", attention_output.shape)
+    # test()
+    # attention = SelfAttention(embedding_size)
+    
 
     # print("Y shape:", y.shape)
     # print("Loader:", len(loader))
@@ -56,6 +80,9 @@ def main():
     # encoded_word = toknizer.decode(tokens)
     # print(encoded_word)
 
+
+def test():
+    test_attention()
 
 if __name__ == "__main__":
     main()
